@@ -27,7 +27,7 @@ const options = {
       }
     ],
   },
-  apis: ['./src/routes/*.js'], // Swagger will read JSDoc comments from these files
+  apis: ['./src/routes/*.js'], 
 };
 
 const swaggerSpec = swaggerJsDoc(options);
