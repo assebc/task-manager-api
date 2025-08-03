@@ -42,5 +42,6 @@ npm install
 
 ### 3. **Run project**
 ```bash
+mongod data/db
 npm start
 ```
