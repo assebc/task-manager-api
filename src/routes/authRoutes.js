@@ -32,7 +32,7 @@ const router = express.Router();
  *                 example: test@test.com
  *               password:
  *                 type: string
- *                 example: test123
+ *                 example: test12345
  *     responses:
  *       201:
  *         description: User created
@@ -62,7 +62,7 @@ router.post('/register', register);
  *                 example: test
  *               password:
  *                 type: string
- *                 example: test123
+ *                 example: test12345
  *     responses:
  *       200:
  *         description: Successful login

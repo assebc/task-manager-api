@@ -50,14 +50,23 @@ router.use(authMiddleware);
  *             schema:
  *               type: object
  *               properties:
- *                 _id:
+ *                 message:
  *                   type: string
- *                 title:
- *                   type: string
- *                 description:
- *                   type: string
- *                 completed:
- *                   type: boolean
+ *                 task:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     completed:
+ *                       type: boolean
+ *                     createdAt:
+ *                       type: string
+ *                     updatedAt:
+ *                       type: string
  */
 router.post('/', createTask);
 
@@ -75,18 +84,27 @@ router.post('/', createTask);
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   _id:
- *                     type: string
- *                   title:
- *                     type: string
- *                   description:
- *                     type: string
- *                   completed:
- *                     type: boolean
+ *               type: object
+ *               properties:
+ *                 count:
+ *                   type: integer
+ *                 tasks:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       completed:
+ *                         type: boolean
+ *                       createdAt:
+ *                         type: string
+ *                       updatedAt:
+ *                         type: string
  */
 router.get('/', getAllTasks);
 
@@ -113,14 +131,21 @@ router.get('/', getAllTasks);
  *             schema:
  *               type: object
  *               properties:
- *                 _id:
- *                   type: string
- *                 title:
- *                   type: string
- *                 description:
- *                   type: string
- *                 completed:
- *                   type: boolean
+ *                 task:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     completed:
+ *                       type: boolean
+ *                     createdAt:
+ *                       type: string
+ *                     updatedAt:
+ *                       type: string
  *       404:
  *         description: Task not found
  */
@@ -160,6 +185,28 @@ router.get('/:id', getTask);
  *     responses:
  *       200:
  *         description: Task updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 task:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     title:
+ *                       type: string
+ *                     description:
+ *                       type: string
+ *                     completed:
+ *                       type: boolean
+ *                     createdAt:
+ *                       type: string
+ *                     updatedAt:
+ *                       type: string
  *       404:
  *         description: Task not found
  */
@@ -183,6 +230,13 @@ router.put('/:id', updateTask);
  *     responses:
  *       200:
  *         description: Task deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       404:
  *         description: Task not found
  */
@@ -199,6 +253,13 @@ router.delete('/:id', deleteTask);
  *     responses:
  *       200:
  *         description: All tasks deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  */
 router.delete('/', deleteTasks);
 

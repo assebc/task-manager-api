@@ -12,12 +12,14 @@ async function register(req, res) {
 
     const doesEmailExist = await User.findOne({ email });
     if (doesEmailExist) {
-      return res.status(400).json({ error: 'Eamil is already registered' });
+      return res.status(400).json({ error: 'Email is already registered' });
     }
 
-    const user = await User.create({ username, password });
+    await User.create({ username, email, password }); 
+
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
+    console.error('Registration Error:', error);
     res.status(500).json({ error: 'Registration failed' });
   }
 }
@@ -26,14 +28,30 @@ async function login(req, res) {
   try {
     const { username, password } = req.body;
 
-    const user = await User.findOne({ username });
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    const user = await User.findOne({ username }).select('+password');
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = generateToken(user._id);
-    res.status(200).json({ token });
+
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
   } catch (error) {
+    console.error('Login Error:', error);
     res.status(500).json({ error: 'Login failed' });
   }
 }
