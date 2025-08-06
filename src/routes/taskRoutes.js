@@ -33,14 +33,31 @@ router.use(authMiddleware);
  *         application/json:
  *           schema:
  *             type: object
- *             required: [title]
+ *             required:
+ *               - title
  *             properties:
  *               title:
  *                 type: string
  *                 example: Finish the project
+ *               description:
+ *                 type: string
+ *                 example: Complete all modules and push to GitHub
  *     responses:
  *       201:
  *         description: Task created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 title:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 completed:
+ *                   type: boolean
  */
 router.post('/', createTask);
 
@@ -55,6 +72,21 @@ router.post('/', createTask);
  *     responses:
  *       200:
  *         description: List of tasks
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   title:
+ *                     type: string
+ *                   description:
+ *                     type: string
+ *                   completed:
+ *                     type: boolean
  */
 router.get('/', getAllTasks);
 
@@ -76,6 +108,19 @@ router.get('/', getAllTasks);
  *     responses:
  *       200:
  *         description: Task retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 title:
+ *                   type: string
+ *                 description:
+ *                   type: string
+ *                 completed:
+ *                   type: boolean
  *       404:
  *         description: Task not found
  */
@@ -105,8 +150,13 @@ router.get('/:id', getTask);
  *             properties:
  *               title:
  *                 type: string
+ *                 example: Updated task title
+ *               description:
+ *                 type: string
+ *                 example: Updated task details
  *               completed:
  *                 type: boolean
+ *                 example: true
  *     responses:
  *       200:
  *         description: Task updated

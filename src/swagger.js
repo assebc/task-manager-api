@@ -3,6 +3,7 @@ const swaggerUi = require('swagger-ui-express');
 
 const options = {
   definition: {
+    openapi: '3.0.0',
     info: {
       title: 'Task Manager API',
       version: '1.0.0',
@@ -27,7 +28,7 @@ const options = {
       }
     ],
   },
-  apis: ['./src/routes/*.js'], 
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsDoc(options);
